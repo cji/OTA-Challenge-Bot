@@ -365,15 +365,14 @@ class SolveCommand(Command):
                         help_members = ""
 
                         if additional_solver:
-                            help_members = "(together with %s)" % ", ".join(
+                            help_members = " (together with %s)" % ", ".join(
                                 additional_solver)
 
-                        message = "<@here> *%s* : %s has solved the \"%s\" challenge %s" % (
-                            challenge.name, member['user']['name'], challenge.name, help_members)
-                        message += "."
+                        message = "<@here> %s has solved the \"%s\" challenge%s. :boom: :boom: :boom:" % (
+                            member['user']['name'], challenge.name, help_members)
 
                         slack_client.api_call("chat.postMessage",
-                                              channel=ctf.channel_id, text=message, as_user=True)
+                                              channel=ctf.channel_id, text=message, as_user=True, parse="full")
 
                     break
 
